@@ -204,11 +204,10 @@ namespace RyanKenward.General.Controllers
 			else
 			{
 				deck = (DeckOfCards)Session[SESSION_DECK];
+				IDeckOfCards deckToAdd = new DeckOfCards();
+				deck.AddCardsToDeck(deckToAdd.GetCards());
 			}
 
-            IDeckOfCards deckToAdd = new DeckOfCards();
-
-            deck.AddCardsToDeck(deckToAdd.GetCards());
             Session[SESSION_DECK] = deck; // Update deck in session
 			return Json(deck, JsonRequestBehavior.AllowGet);
 		}
