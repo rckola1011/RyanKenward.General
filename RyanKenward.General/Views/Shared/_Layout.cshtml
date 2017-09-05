@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+	<link rel="stylesheet" type="text/css" href="/Styles/Index.css" />
+</head>
+<body>
+	<div class="header">
+		<div class="header-padder">
+    		<div class="header-background-text">C#</div>
+            <div class="header-title">
+                <h1 class="header-title">Ryan Kenward</h1>
+    		</div>
+		</div>
+	</div>
+	<div class="body-output">
+        <div class="body-output-padder">
+			<a name="output"></a>
+            <span id="bodyOutput"></span>
+        </div>
+	</div>
+	<div class="body-content">
+	@RenderBody() 
+	</div>
+    @RenderSection("JavaScript", required: true)
+</body>
+</html>

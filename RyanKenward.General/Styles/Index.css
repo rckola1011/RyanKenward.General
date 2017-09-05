@@ -1,0 +1,87 @@
+﻿html,
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+html {
+}
+
+body {
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    background-color: #EEE;
+    overflow: auto;
+}
+
+div.header-padder {
+    position: relative;
+    height: 100%;
+    padding: 0px 5px;
+    overflow: hidden;
+}
+
+div.header-background-text {
+    position: absolute;
+    right: 10px;
+    font-size: 250px;
+    line-height: 150px;
+    color: white;
+}
+
+div.header-title {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+h1, 
+h2 {
+    margin: 0px;
+    padding: 0px;
+}
+
+h1.header-title {
+    font-size: 100px;
+    line-height: 75px;
+    color: white;
+}
+
+div.body-output {
+    position: relative;
+    width: 100%;
+    background-color: #D5F5E3;
+}
+
+div.body-output-padder {
+    position: relative;
+    padding: 5px 10px;
+}
+
+div.body-content {
+    padding: 10px;
+}
+
+div.button {
+    padding-bottom: 2px;
+}
+
+input[type="button"] {
+    background-color: #CCCCCC;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    height: 50px;
+    padding: 0px 15px;
+    width: 300px;
+}
+
+select {
+    width: 300px;
+}

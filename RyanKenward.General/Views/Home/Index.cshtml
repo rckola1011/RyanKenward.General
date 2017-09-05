@@ -1,0 +1,74 @@
+﻿@section JavaScript
+{
+   <script type="text/javascript" src="@Url.Content("/Scripts/jquery-3.2.1.js")"></script>
+   <script type="text/javascript" src="@Url.Content("/Scripts/Home/Index.js")"></script>
+}
+<div class="button">
+    <input type="button" id="btnGetNewDeckOfCards" value="Get a New Deck of Cards" onclick="getNewDeckOfCards()" />
+</div>
+<div class="button">
+    <input type="button" id="btnGetDeckOfCards" value="View Your Deck of Cards" onclick="getDeckOfCards()" />
+</div>
+<div class="button">
+    <input type="button" id="btnShuffleCards" value="Shuffle Deck" onclick="shuffleCards()" />
+</div>
+<div class="button">
+    <input type="button" id="btnGetRandomCard" value="Get a Random Card" onclick="getRandomCard()" />
+</div>
+<div class="button">
+    <input type="button" id="btnSortCardsAscending" value="Sort Deck (Ascending)" onclick="sortCards('asc')" />
+</div>
+<div class="button">
+    <input type="button" id="btnSortCardsDescending" value="Sort Deck (Descending)" onclick="sortCards('desc')" />
+</div>
+<div class="button">
+	<div>
+    	Card name:<br/>
+    	<select id="selCardNames">
+            <!-- Populated on load -->
+    	</select>
+    </div>
+    <input type="button" id="btnFilterCardsByName" value="Filter Cards By Name" onclick="filterCards('name')" />
+</div>
+<div class="button">
+	<div>
+        Card suit:<br/>
+        <select id="selCardSuits">
+            <!-- Populated on load -->
+        </select>
+    </div>
+    <input type="button" id="btnFilterCardsBySuit" value="Filter Cards By Suit" onclick="filterCards('suit')" />
+</div>
+<div class="button">
+    <input type="button" id="btnAddDeck" value="Add a Deck" onclick="addDeck()" />
+</div>
+<div class="button">
+    <input type="button" id="btnAceUpTheSleeve" value="Ace Up The Sleeve" onclick="aceUpTheSleeve()" />
+</div>
+<div class="button">
+    <div>
+        Number of random cards to remove:<br/>
+        <select id="selNumberOfCardsToRemove">
+            <option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+            <option value="5">5</option>
+			<option value="6">6</option>
+            <option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+        </select>
+    </div>
+    <input type="button" id="btnRemoveRandomCards" value="Remove Random Cards" onclick="removeRandomCards()" />
+</div>
+<div class="button">
+    <input type="button" id="btnLowestCard" value="Get Lowest Ranked Card" onclick="getCardByRank('low')" />
+</div>
+<div class="button">
+    <input type="button" id="btnHighestCard" value="Get Highest Ranked Card" onclick="getCardByRank('high')" />
+</div>
+<div class="button">
+    <input type="button" id="btnClearSession" value="Clear Session" onclick="clearSession()" />
+</div>
