@@ -10,8 +10,8 @@ namespace RyanKenward.General.Models
 
         public CardRank(ICardName name)
         {
-        	if (name == null)
-        		throw new ArgumentException("Card name cannot be null");
+            if (name == null)
+            	throw new ArgumentException("Card name cannot be null");
 
             // New in C# 7: declare out variables in method call
             SetCardRank(name, out bool success);
@@ -36,51 +36,51 @@ namespace RyanKenward.General.Models
         private void SetCardRank(ICardName name, out bool success)
         {
             switch (name.GetValue().ToLower())
-        	{
-        		case "ace":
-        			this.Value = 1;
-        			break;
-        		case "two":
-        			this.Value = 2;
-        			break;
-        		case "three":
-        			this.Value = 3;
-        			break;
-        		case "four":
-        			this.Value = 4;
-        			break;
-        		case "five":
-        			this.Value = 5;
-        			break;
-        		case "six":
-        			this.Value = 6;
-        			break;
-        		case "seven":
-        			this.Value = 7;
-        			break;
-        		case "eight":
-        			this.Value = 8;
-        			break;
-        		case "nine":
-        			this.Value = 9;
-        			break;
-        		case "ten":
-        			this.Value = 10;
-        			break;
-        		case "jack":
-        			this.Value = 11;
-        			break;
-        		case "queen":
-        			this.Value = 12;
-        			break;
-        		case "king":
-        			this.Value = 13;
-        			break;
-        		default:
-        			this.Value = 0;
+            {
+            	case "ace":
+            		this.Value = 1;
+            		break;
+            	case "two":
+            		this.Value = 2;
+            		break;
+            	case "three":
+            		this.Value = 3;
+            		break;
+            	case "four":
+            		this.Value = 4;
+            		break;
+            	case "five":
+            		this.Value = 5;
+            		break;
+            	case "six":
+            		this.Value = 6;
+            		break;
+            	case "seven":
+            		this.Value = 7;
+            		break;
+            	case "eight":
+            		this.Value = 8;
+            		break;
+            	case "nine":
+            		this.Value = 9;
+            		break;
+            	case "ten":
+            		this.Value = 10;
+            		break;
+            	case "jack":
+            		this.Value = 11;
+            		break;
+            	case "queen":
+            		this.Value = 12;
+            		break;
+            	case "king":
+            		this.Value = 13;
+            		break;
+            	default:
+            		this.Value = 0;
                     success = false;
-        			break;
-        	}
+            		break;
+            }
             success = true;
         }
 	}

@@ -12,15 +12,15 @@ namespace RyanKenward.General.Models
 
         public Card(ICardName name, ICardSuit suit)
         {
-        	if (name == null)
-        		throw new ArgumentException("Card name cannot be null");
+            if (name == null)
+            	throw new ArgumentException("Card name cannot be null");
 
-        	if (suit == null)
-        		throw new ArgumentException("Card suit cannot be null");
-            
-        	this.Name = name;
-        	this.Rank = new CardRank(this.Name);
-        	this.Suit = suit;
+            if (suit == null)
+            	throw new ArgumentException("Card suit cannot be null");
+
+            this.Name = name;
+            this.Rank = new CardRank(this.Name);
+            this.Suit = suit;
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace RyanKenward.General.Models
         /// </summary>
         public new String ToString()
         {
-        	return String.Format("{0}{1}", this.Name.GetValue(), this.Suit.GetSymbol());
+            return String.Format("{0}{1}", this.Name.GetValue(), this.Suit.GetSymbol());
         }
-	}
+    }
 }

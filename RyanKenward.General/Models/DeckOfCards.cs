@@ -27,10 +27,10 @@ namespace RyanKenward.General.Models
         /// <param name="cards">Cards.</param>
         public DeckOfCards(List<Card> cards)
         {
-        	if (cards == null)
-        		throw new ArgumentException("Card list cannot be null");
+            if (cards == null)
+            	throw new ArgumentException("Card list cannot be null");
 
-        	this.Cards = cards;
+            this.Cards = cards;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace RyanKenward.General.Models
         /// <returns>The cards.</returns>
         public List<Card> GetCards()
         {
-        	return this.Cards;
+	        return this.Cards;
         }
 
         /// <summary>
@@ -62,7 +62,6 @@ namespace RyanKenward.General.Models
         		}
         	}
             return cards;
-        	//this.Cards = cards;
         }
 
         /// <summary>
@@ -71,9 +70,9 @@ namespace RyanKenward.General.Models
         /// <param name="cards">List of cards to add.</param>
         public void AddCardsToDeck(List<Card> cards)
         {
-        	if (cards == null)
-        		throw new ArgumentException("Card list cannot be null");
-            
+            if (cards == null)
+            	throw new ArgumentException("Card list cannot be null");
+
             ((List<Card>)this.Cards).AddRange(cards);
         }
 
@@ -83,9 +82,9 @@ namespace RyanKenward.General.Models
         /// <param name="cards">List of cards to add.</param>
         public void AddCardsToDeckWithoutDuplicates(List<Card> cards)
         {
-        	if (cards == null)
-        		throw new ArgumentException("Card list cannot be null");
-            
+            if (cards == null)
+            	throw new ArgumentException("Card list cannot be null");
+
             AddCardsToDeck(cards);
             this.Cards = this.GetCards().GroupBy(card => new { 
                     CardName = card.GetName().GetValue(), 
@@ -100,9 +99,9 @@ namespace RyanKenward.General.Models
         /// <param name="card">Card.</param>
         public void AddCardToDeck(Card card)
         {
-        	if (card == null)
-        		throw new ArgumentException("Card cannot be null");
-            
+            if (card == null)
+            	throw new ArgumentException("Card cannot be null");
+
             this.Cards.Add(card);
         }
 
@@ -126,8 +125,8 @@ namespace RyanKenward.General.Models
             if (numberOfCards < 0)
                 throw new ArgumentException("The number of random cards must be greater than zero.");
 
-        	// If the number of random cards is more or equal to the cards in the deck, return the entire deck
-        	if (this.Cards.Count <= numberOfCards)
+            // If the number of random cards is more or equal to the cards in the deck, return the entire deck
+            if (this.Cards.Count <= numberOfCards)
                 return this.Cards;
 
             List<Card> randomCards = new List<Card>();
@@ -142,14 +141,14 @@ namespace RyanKenward.General.Models
         /// <returns>The random card.</returns>
         public Card GetRandomCard()
         {
-        	using (RNGCryptoServiceProvider rNGCryptoServiceProvider = new RNGCryptoServiceProvider())
-        	{
-        		byte[] byteArray = new byte[8];
-        		rNGCryptoServiceProvider.GetBytes(byteArray);
-        		int iRandomNumber = BitConverter.ToInt32(byteArray, 0);
-        		int iRandomCard = System.Math.Abs((iRandomNumber % this.Cards.Count));
+            using (RNGCryptoServiceProvider rNGCryptoServiceProvider = new RNGCryptoServiceProvider())
+            {
+            	byte[] byteArray = new byte[8];
+            	rNGCryptoServiceProvider.GetBytes(byteArray);
+            	int iRandomNumber = BitConverter.ToInt32(byteArray, 0);
+            	int iRandomCard = System.Math.Abs((iRandomNumber % this.Cards.Count));
                 return this.Cards[iRandomCard];
-        	}
+            }
         }
 
         /// <summary>
@@ -164,14 +163,14 @@ namespace RyanKenward.General.Models
              */
 
             // Task to perform in background.  We don't need this value yet
-        	Task<List<Card>> randomCardTask = new Task<List<Card>>(() => GetRandomCards(numberOfCardsToRemove));
+            Task<List<Card>> randomCardTask = new Task<List<Card>>(() => GetRandomCards(numberOfCardsToRemove));
             randomCardTask.Start();
 
             // Logic to perform while task is running
-        	Shuffle();
+            Shuffle();
 
             // Ok now we need the value of the task for sure.  Let's wait for it if it is not yet finished
-        	await randomCardTask;
+            await randomCardTask;
 
             // Filter out the random cards from the deck
             this.Cards = this.Cards
@@ -179,7 +178,7 @@ namespace RyanKenward.General.Models
                                                                       && rc.GetSuit().GetValue() == ec.GetSuit().GetValue())).ToList();
 
             // Return random cards that were filtered out
-        	return randomCardTask.Result;   // ValueTask is new in C# 7 and has extra functionality over Task<>
+            return randomCardTask.Result;   // ValueTask is new in C# 7 and has extra functionality over Task<>
         }
 
         /// <summary>
@@ -188,8 +187,8 @@ namespace RyanKenward.General.Models
         public void SortAscending()
         {
             // Method syntax LINQ
-        	List<Card> cards = this.Cards.OrderBy(card => card.GetRank().GetValue()).ToList<Card>();
-        	this.Cards = cards;
+            List<Card> cards = this.Cards.OrderBy(card => card.GetRank().GetValue()).ToList<Card>();
+            this.Cards = cards;
         }
 
         /// <summary>
@@ -198,10 +197,10 @@ namespace RyanKenward.General.Models
         public void SortDescending()
         {
             // Query syntax LINQ
-        	IEnumerable<Card> cards =
+            IEnumerable<Card> cards =
                 from card in this.Cards.AsEnumerable()
                 orderby card.GetRank().GetValue() descending
-            	select card;
+                select card;
             this.Cards = cards.ToList<Card>();
         }
 
@@ -210,14 +209,14 @@ namespace RyanKenward.General.Models
         /// </summary>
         public void Shuffle()
         {
-        	List<Card> shuffledCards = new List<Card>();
-        	while (this.Cards.Count > 0)
-        	{
+            List<Card> shuffledCards = new List<Card>();
+            while (this.Cards.Count > 0)
+            {
                 Card randomCard = GetRandomCard();
-        		shuffledCards.Add(randomCard);
-        		this.Cards.Remove(randomCard);
-        	}
-        	this.Cards = shuffledCards;
+            	shuffledCards.Add(randomCard);
+            	this.Cards.Remove(randomCard);
+            }
+            this.Cards = shuffledCards;
         }
 
         /// <summary>
@@ -229,13 +228,13 @@ namespace RyanKenward.General.Models
         {
             if (cardName == null)
                 throw new ArgumentException("Card name cannot be null");
-            
-        	// Query syntax LINQ
-        	IEnumerable<Card> cards =
-        		from card in this.Cards.AsEnumerable()
+
+            // Query syntax LINQ
+            IEnumerable<Card> cards =
+            	from card in this.Cards.AsEnumerable()
                 where card.GetName().GetValue() == cardName.ToString()
-        		select card;
-        	return cards.ToList<Card>();
+            	select card;
+            return cards.ToList<Card>();
         }
 
         /// <summary>
@@ -246,11 +245,11 @@ namespace RyanKenward.General.Models
         public List<Card> GetAllCardsByCardSuit(String cardSuit)
         {
             if (cardSuit == null)
-        		throw new ArgumentException("Card suit cannot be null");
-            
-        	// Method syntax LINQ
-        	List<Card> cards = this.Cards.Where(card => card.GetSuit().GetValue() == cardSuit.ToString()).ToList<Card>();
-        	return cards;
+            	throw new ArgumentException("Card suit cannot be null");
+
+            // Method syntax LINQ
+            List<Card> cards = this.Cards.Where(card => card.GetSuit().GetValue() == cardSuit.ToString()).ToList<Card>();
+            return cards;
         }
 
         /// <summary>
@@ -259,7 +258,7 @@ namespace RyanKenward.General.Models
         /// <returns>The lowest rank card.</returns>
         public Card GetLowestRankCard()
         {
-        	return this.Cards.First(card => card.Rank.GetValue() == this.Cards.Min(minCard => minCard.GetRank().GetValue()));
+            return this.Cards.First(card => card.Rank.GetValue() == this.Cards.Min(minCard => minCard.GetRank().GetValue()));
         }
 
         /// <summary>
@@ -268,7 +267,7 @@ namespace RyanKenward.General.Models
         /// <returns>The highest rank card.</returns>
         public Card GetHighestRankCard()
         {
-        	return this.Cards.First(card => card.Rank.GetValue() == this.Cards.Max(maxCard => maxCard.GetRank().GetValue()));
+            return this.Cards.First(card => card.Rank.GetValue() == this.Cards.Max(maxCard => maxCard.GetRank().GetValue()));
         }
 
         /// <summary>
@@ -277,7 +276,7 @@ namespace RyanKenward.General.Models
         public new String ToString()
         {
             String cardString = "";
-        	foreach (Card card in this.Cards)
+            foreach (Card card in this.Cards)
                 cardString += card.ToString() + " ";
             return cardString.TrimEnd();
         }
