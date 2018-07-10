@@ -4,9 +4,9 @@ namespace RyanKenward.General.Models.Enums
 {
 	public enum ECardSuit
 	{
-		Clubs,
-		Diamonds,
-		Hearts,
-		Spades
+        Clubs,
+        Diamonds,
+        Hearts,
+        Spades
 	}
 }

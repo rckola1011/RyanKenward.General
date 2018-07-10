@@ -15,10 +15,10 @@ namespace RyanKenward.General.Models
         {
             this.Value = cardSuit.ToString();
 
-			// New in C# 7: declare out variables in method call
+        	// New in C# 7: declare out variables in method call
             SetSymbol(cardSuit, out bool success);
 
-			if (!success)
+        	if (!success)
                 Console.Write("Failed to find the symbol for suit '{0}'", cardSuit.ToString());
         }
 
@@ -47,7 +47,7 @@ namespace RyanKenward.General.Models
         public static List<String> GetCardSuits()
         {
             List<String> cardSuits = new List<String>(Enum.GetNames(typeof(ECardSuit)));
-			return cardSuits;
+        	return cardSuits;
         }
 
         /// <summary>
@@ -58,18 +58,18 @@ namespace RyanKenward.General.Models
         {
             switch (cardSuit.ToString().ToLower())
             {
-				case "clubs":
-					this.Symbol = "♣";
-					break;
-				case "diamonds":
-					this.Symbol = "♢";
-					break;
-				case "hearts":
-					this.Symbol = "♡";
-					break;
-				case "spades":
-					this.Symbol = "♠";
-					break;
+        		case "clubs":
+        			this.Symbol = "♣";
+        			break;
+        		case "diamonds":
+        			this.Symbol = "♢";
+        			break;
+        		case "hearts":
+        			this.Symbol = "♡";
+        			break;
+        		case "spades":
+        			this.Symbol = "♠";
+        			break;
                 default:
                     this.Symbol = "";
                     success = false;

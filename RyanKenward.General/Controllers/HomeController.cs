@@ -17,58 +17,58 @@ namespace RyanKenward.General.Controllers
             return View();
         }
 
-		[HttpGet]
-		public JsonResult HelloWorld()
-		{
-			return Json("Hello world!", JsonRequestBehavior.AllowGet);
-		}
+        [HttpGet]
+        public JsonResult HelloWorld()
+        {
+            return Json("Hello world!", JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpGet]
-		public JsonResult CardNames()
-		{
+        [HttpGet]
+        public JsonResult CardNames()
+        {
             List<String> cardNames = CardName.GetCardNames();
-			return Json(cardNames, JsonRequestBehavior.AllowGet);
-		}
+            return Json(cardNames, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpGet]
-		public JsonResult CardSuits()
-		{
+        [HttpGet]
+        public JsonResult CardSuits()
+        {
             List<String> cardSuits = CardSuit.GetCardSuits();
-			return Json(cardSuits, JsonRequestBehavior.AllowGet);
-		}
+            return Json(cardSuits, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpPost]
-		public JsonResult CreateDeckOfCards()
-		{
-			IDeckOfCards deck = new DeckOfCards();
-			if (Session[SESSION_DECK] == null)
-			{
-				Session.Add(SESSION_DECK, deck);
-			}
-			else
-			{
-				Session[SESSION_DECK] = deck;
-			}
-			return Json(deck, JsonRequestBehavior.AllowGet);
-		}
+        [HttpPost]
+        public JsonResult CreateDeckOfCards()
+        {
+            IDeckOfCards deck = new DeckOfCards();
+            if (Session[SESSION_DECK] == null)
+            {
+            	Session.Add(SESSION_DECK, deck);
+            }
+            else
+            {
+            	Session[SESSION_DECK] = deck;
+            }
+            return Json(deck, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpGet]
-		public JsonResult DeckOfCards()
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
+        [HttpGet]
+        public JsonResult DeckOfCards()
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
                 Session.Add(SESSION_DECK, deck);
-			}
-			else
-			{
+            }
+            else
+            {
                 deck = (DeckOfCards)Session[SESSION_DECK];
-			}
-			return Json(deck, JsonRequestBehavior.AllowGet);
-		}
+            }
+            return Json(deck, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpPost]
+        [HttpPost]
         public JsonResult ShuffleCards()
         {
             IDeckOfCards deck;
@@ -81,76 +81,76 @@ namespace RyanKenward.General.Controllers
                 deck = (DeckOfCards)Session[SESSION_DECK];
             }
 
-			deck.Shuffle();
+            deck.Shuffle();
             Session[SESSION_DECK] = deck; // Update deck in session
-			return Json(deck, JsonRequestBehavior.AllowGet);
-		}
+            return Json(deck, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpGet]
-		public JsonResult RandomCard()
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-			}
+        [HttpGet]
+        public JsonResult RandomCard()
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            }
 
-			ICard randomCard = deck.GetRandomCard();
-			return Json(randomCard, JsonRequestBehavior.AllowGet);
-		}
+            ICard randomCard = deck.GetRandomCard();
+            return Json(randomCard, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpGet]
-		public JsonResult SortCardsAscending()
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-			}
+        [HttpGet]
+        public JsonResult SortCardsAscending()
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            }
 
-			deck.SortAscending();
+            deck.SortAscending();
             Session[SESSION_DECK] = deck; // Update deck in session
-			return Json(deck, JsonRequestBehavior.AllowGet);
-		}
+            return Json(deck, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpGet]
-		public JsonResult SortCardsDescending()
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-			}
+        [HttpGet]
+        public JsonResult SortCardsDescending()
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            }
 
-			deck.SortDescending();
+            deck.SortDescending();
             Session[SESSION_DECK] = deck; // Update deck in session
-			return Json(deck, JsonRequestBehavior.AllowGet);
-		}
+            return Json(deck, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpPost]
-		public JsonResult FilterDeckByCardName(String cardName)
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-			}
+        [HttpPost]
+        public JsonResult FilterDeckByCardName(String cardName)
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            }
 
             IList<Card> cardsByName;
             try 
@@ -163,21 +163,21 @@ namespace RyanKenward.General.Controllers
                 cardsByName = new List<Card>();
             }
 
-			return Json(cardsByName, JsonRequestBehavior.AllowGet);
-		}
+            return Json(cardsByName, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpPost]
-		public JsonResult FilterDeckByCardSuit(String cardSuit)
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-			}
+        [HttpPost]
+        public JsonResult FilterDeckByCardSuit(String cardSuit)
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            }
 
             IList<Card> cardsBySuit;
             try
@@ -190,102 +190,102 @@ namespace RyanKenward.General.Controllers
                 cardsBySuit = new List<Card>();
             }
 
-			return Json(cardsBySuit, JsonRequestBehavior.AllowGet);
-		}
+            return Json(cardsBySuit, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpPost]
-		public JsonResult AddDeck()
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-				IDeckOfCards deckToAdd = new DeckOfCards();
-				deck.AddCardsToDeck(deckToAdd.GetCards());
-			}
+        [HttpPost]
+        public JsonResult AddDeck()
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            	IDeckOfCards deckToAdd = new DeckOfCards();
+            	deck.AddCardsToDeck(deckToAdd.GetCards());
+            }
 
             Session[SESSION_DECK] = deck; // Update deck in session
-			return Json(deck, JsonRequestBehavior.AllowGet);
-		}
+            return Json(deck, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpPost]
-		public JsonResult AceUpTheSleeve()
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-			}
+        [HttpPost]
+        public JsonResult AceUpTheSleeve()
+        {
+            DeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            }
 
             // Add card in parallel
-			Task task = new Task(() => { 
+            Task task = new Task(() => { 
                 deck.AceUpTheSleeve();
                 Session[SESSION_DECK] = deck; // Update deck in session
-			});
+            });
             task.Start();
 
-			return Json(deck, JsonRequestBehavior.AllowGet);
-		}
+            return Json(deck, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpPost]
-		public JsonResult RemoveRandomCards(int numberOfCardsToRemove)
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-			}
+        [HttpPost]
+        public JsonResult RemoveRandomCards(int numberOfCardsToRemove)
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            }
 
-			ValueTask<List<Card>> cardsRemovedTask = deck.RemoveRandomCardsAsync(numberOfCardsToRemove);
+            ValueTask<List<Card>> cardsRemovedTask = deck.RemoveRandomCardsAsync(numberOfCardsToRemove);
 
-			return Json(cardsRemovedTask.Result, JsonRequestBehavior.AllowGet);
-		}
+            return Json(cardsRemovedTask.Result, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpGet]
-		public JsonResult LowestRankCard()
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-			}
+        [HttpGet]
+        public JsonResult LowestRankCard()
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            }
 
-			ICard card = deck.GetLowestRankCard();
-			return Json(card, JsonRequestBehavior.AllowGet);
-		}
+            ICard card = deck.GetLowestRankCard();
+            return Json(card, JsonRequestBehavior.AllowGet);
+        }
 
-		[HttpGet]
-		public JsonResult HighestRankCard()
-		{
-			IDeckOfCards deck;
-			if (Session[SESSION_DECK] == null)
-			{
-				deck = new DeckOfCards();
-			}
-			else
-			{
-				deck = (DeckOfCards)Session[SESSION_DECK];
-			}
+        [HttpGet]
+        public JsonResult HighestRankCard()
+        {
+            IDeckOfCards deck;
+            if (Session[SESSION_DECK] == null)
+            {
+            	deck = new DeckOfCards();
+            }
+            else
+            {
+            	deck = (DeckOfCards)Session[SESSION_DECK];
+            }
 
-			ICard card = deck.GetHighestRankCard();
-			return Json(card, JsonRequestBehavior.AllowGet);
-		}
+            ICard card = deck.GetHighestRankCard();
+            return Json(card, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public JsonResult ClearSession()

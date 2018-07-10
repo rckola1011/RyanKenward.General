@@ -11,67 +11,68 @@ namespace RyanKenward.General.Models
     [Serializable]
     public class DeckOfCards : IDeckOfCards
 	{
-		public List<Card> Cards { get; private set; }
+        public List<Card> Cards { get; private set; }
 
-		/// <summary>
-		/// Initializes a new instance of the DeckOfCards class with a standard deck of cards.
-		/// </summary>
-		public DeckOfCards()
-		{
-            CreateStandardDeck();
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the DeckOfCards class with a list of cards.
-		/// </summary>
-		/// <param name="cards">Cards.</param>
-		public DeckOfCards(List<Card> cards)
-		{
-			if (cards == null)
-				throw new ArgumentException("Card list cannot be null");
-
-			this.Cards = cards;
-		}
-
-		/// <summary>
-		/// Gets the cards list.
-		/// </summary>
-		/// <returns>The cards.</returns>
-		public List<Card> GetCards()
-		{
-			return this.Cards;
-		}
-
-		/// <summary>
-		/// Creates a standard deck of cards.
-		/// </summary>
-		public void CreateStandardDeck()
-		{
-			List<Card> cards = new List<Card>();
-			int numOfCardNames = Enum.GetValues(typeof(ECardName)).Length;
-			int numOfCardSuits = Enum.GetValues(typeof(ECardSuit)).Length;
-			// Loop names of cards
-			for (int iCard = 0; iCard < numOfCardNames; iCard++)
-			{
-                CardName name = new CardName((ECardName)Enum.GetValues(typeof(ECardName)).GetValue(iCard));
-				// Loop card suits
-				for (int iSuit = 0; iSuit < numOfCardSuits; iSuit++)
-				{
-                    CardSuit suit = new CardSuit((ECardSuit)Enum.GetValues(typeof(ECardSuit)).GetValue(iSuit));
-					cards.Add(new Card(name, suit));
-				}
-			}
-			this.Cards = cards;
-		}
-
-		/// <summary>
-		/// Adds the list of cards to the deck.
-		/// </summary>
-		/// <param name="cards">List of cards to add.</param>
-		public void AddCardsToDeck(List<Card> cards)
+        /// <summary>
+        /// Initializes a new instance of the DeckOfCards class with a standard deck of cards.
+        /// </summary>
+        public DeckOfCards()
         {
-			if (cards == null)
-				throw new ArgumentException("Card list cannot be null");
+            this.Cards = DeckOfCards.CreateStandardDeck();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the DeckOfCards class with a list of cards.
+        /// </summary>
+        /// <param name="cards">Cards.</param>
+        public DeckOfCards(List<Card> cards)
+        {
+        	if (cards == null)
+        		throw new ArgumentException("Card list cannot be null");
+
+        	this.Cards = cards;
+        }
+
+        /// <summary>
+        /// Gets the cards list.
+        /// </summary>
+        /// <returns>The cards.</returns>
+        public List<Card> GetCards()
+        {
+        	return this.Cards;
+        }
+
+        /// <summary>
+        /// Creates a standard deck of cards.
+        /// </summary>
+        public static List<Card> CreateStandardDeck()
+        {
+        	List<Card> cards = new List<Card>();
+        	int numOfCardNames = Enum.GetValues(typeof(ECardName)).Length;
+        	int numOfCardSuits = Enum.GetValues(typeof(ECardSuit)).Length;
+        	// Loop names of cards
+        	for (int iCard = 0; iCard < numOfCardNames; iCard++)
+        	{
+                CardName name = new CardName((ECardName)Enum.GetValues(typeof(ECardName)).GetValue(iCard));
+        		// Loop card suits
+        		for (int iSuit = 0; iSuit < numOfCardSuits; iSuit++)
+        		{
+                    CardSuit suit = new CardSuit((ECardSuit)Enum.GetValues(typeof(ECardSuit)).GetValue(iSuit));
+        			cards.Add(new Card(name, suit));
+        		}
+        	}
+            return cards;
+        	//this.Cards = cards;
+        }
+
+        /// <summary>
+        /// Adds the list of cards to the deck.
+        /// </summary>
+        /// <param name="cards">List of cards to add.</param>
+        public void AddCardsToDeck(List<Card> cards)
+        {
+        	if (cards == null)
+        		throw new ArgumentException("Card list cannot be null");
             
             ((List<Card>)this.Cards).AddRange(cards);
         }
@@ -82,8 +83,8 @@ namespace RyanKenward.General.Models
         /// <param name="cards">List of cards to add.</param>
         public void AddCardsToDeckWithoutDuplicates(List<Card> cards)
         {
-			if (cards == null)
-				throw new ArgumentException("Card list cannot be null");
+        	if (cards == null)
+        		throw new ArgumentException("Card list cannot be null");
             
             AddCardsToDeck(cards);
             this.Cards = this.GetCards().GroupBy(card => new { 
@@ -99,8 +100,8 @@ namespace RyanKenward.General.Models
         /// <param name="card">Card.</param>
         public void AddCardToDeck(Card card)
         {
-			if (card == null)
-				throw new ArgumentException("Card cannot be null");
+        	if (card == null)
+        		throw new ArgumentException("Card cannot be null");
             
             this.Cards.Add(card);
         }
@@ -125,8 +126,8 @@ namespace RyanKenward.General.Models
             if (numberOfCards < 0)
                 throw new ArgumentException("The number of random cards must be greater than zero.");
 
-			// If the number of random cards is more or equal to the cards in the deck, return the entire deck
-			if (this.Cards.Count <= numberOfCards)
+        	// If the number of random cards is more or equal to the cards in the deck, return the entire deck
+        	if (this.Cards.Count <= numberOfCards)
                 return this.Cards;
 
             List<Card> randomCards = new List<Card>();
@@ -141,14 +142,14 @@ namespace RyanKenward.General.Models
         /// <returns>The random card.</returns>
         public Card GetRandomCard()
         {
-			using (RNGCryptoServiceProvider rNGCryptoServiceProvider = new RNGCryptoServiceProvider())
-			{
-				byte[] byteArray = new byte[8];
-				rNGCryptoServiceProvider.GetBytes(byteArray);
-				int iRandomNumber = BitConverter.ToInt32(byteArray, 0);
-				int iRandomCard = System.Math.Abs((iRandomNumber % this.Cards.Count));
+        	using (RNGCryptoServiceProvider rNGCryptoServiceProvider = new RNGCryptoServiceProvider())
+        	{
+        		byte[] byteArray = new byte[8];
+        		rNGCryptoServiceProvider.GetBytes(byteArray);
+        		int iRandomNumber = BitConverter.ToInt32(byteArray, 0);
+        		int iRandomCard = System.Math.Abs((iRandomNumber % this.Cards.Count));
                 return this.Cards[iRandomCard];
-			}
+        	}
         }
 
         /// <summary>
@@ -156,21 +157,21 @@ namespace RyanKenward.General.Models
         /// </summary>
         /// <returns>The random cards removed.</returns>
         /// <param name="numberOfCardsToRemove">Number of cards to remove.</param>
-		public async ValueTask<List<Card>> RemoveRandomCardsAsync(int numberOfCardsToRemove)
-		{
+        public async ValueTask<List<Card>> RemoveRandomCardsAsync(int numberOfCardsToRemove)
+        {
             /*
              * The following method demonstrates asyncronous logic, LINQ joins, and new features in C# 7.
              */
 
             // Task to perform in background.  We don't need this value yet
-			Task<List<Card>> randomCardTask = new Task<List<Card>>(() => GetRandomCards(numberOfCardsToRemove));
+        	Task<List<Card>> randomCardTask = new Task<List<Card>>(() => GetRandomCards(numberOfCardsToRemove));
             randomCardTask.Start();
 
             // Logic to perform while task is running
-			Shuffle();
+        	Shuffle();
 
             // Ok now we need the value of the task for sure.  Let's wait for it if it is not yet finished
-			await randomCardTask;
+        	await randomCardTask;
 
             // Filter out the random cards from the deck
             this.Cards = this.Cards
@@ -178,107 +179,107 @@ namespace RyanKenward.General.Models
                                                                       && rc.GetSuit().GetValue() == ec.GetSuit().GetValue())).ToList();
 
             // Return random cards that were filtered out
-			return randomCardTask.Result;   // ValueTask is new in C# 7 and has extra functionality over Task<>
-		}
+        	return randomCardTask.Result;   // ValueTask is new in C# 7 and has extra functionality over Task<>
+        }
 
-		/// <summary>
-		/// Sorts the deck of cards in ascending order.
-		/// </summary>
-		public void SortAscending()
-		{
+        /// <summary>
+        /// Sorts the deck of cards in ascending order.
+        /// </summary>
+        public void SortAscending()
+        {
             // Method syntax LINQ
-			List<Card> cards = this.Cards.OrderBy(card => card.GetRank().GetValue()).ToList<Card>();
-			this.Cards = cards;
-		}
+        	List<Card> cards = this.Cards.OrderBy(card => card.GetRank().GetValue()).ToList<Card>();
+        	this.Cards = cards;
+        }
 
         /// <summary>
         /// Sorts the deck of cards in descending order.
         /// </summary>
-		public void SortDescending()
-		{
+        public void SortDescending()
+        {
             // Query syntax LINQ
-			IEnumerable<Card> cards =
+        	IEnumerable<Card> cards =
                 from card in this.Cards.AsEnumerable()
                 orderby card.GetRank().GetValue() descending
             	select card;
             this.Cards = cards.ToList<Card>();
-		}
+        }
 
-		/// <summary>
-		/// Shuffles the deck of cards randomly.
-		/// </summary>
-		public void Shuffle()
-		{
-			List<Card> shuffledCards = new List<Card>();
-			while (this.Cards.Count > 0)
-			{
+        /// <summary>
+        /// Shuffles the deck of cards randomly.
+        /// </summary>
+        public void Shuffle()
+        {
+        	List<Card> shuffledCards = new List<Card>();
+        	while (this.Cards.Count > 0)
+        	{
                 Card randomCard = GetRandomCard();
-				shuffledCards.Add(randomCard);
-				this.Cards.Remove(randomCard);
-			}
-			this.Cards = shuffledCards;
-		}
+        		shuffledCards.Add(randomCard);
+        		this.Cards.Remove(randomCard);
+        	}
+        	this.Cards = shuffledCards;
+        }
 
-		/// <summary>
+        /// <summary>
         /// Gets all cards in the deck by card name.
         /// </summary>
         /// <returns>All cards matching the card name.</returns>
         /// <param name="cardName">Card name.</param>
         public List<Card> GetAllCardsByCardName(String cardName)
-		{
+        {
             if (cardName == null)
                 throw new ArgumentException("Card name cannot be null");
             
-			// Query syntax LINQ
-			IEnumerable<Card> cards =
-				from card in this.Cards.AsEnumerable()
+        	// Query syntax LINQ
+        	IEnumerable<Card> cards =
+        		from card in this.Cards.AsEnumerable()
                 where card.GetName().GetValue() == cardName.ToString()
-				select card;
-			return cards.ToList<Card>();
-		}
+        		select card;
+        	return cards.ToList<Card>();
+        }
 
-		/// <summary>
+        /// <summary>
         /// Gets all cards in the deck by card suit.
         /// </summary>
         /// <returns>All cards matching the card suit.</returns>
         /// <param name="cardSuit">Card suit.</param>
-		public List<Card> GetAllCardsByCardSuit(String cardSuit)
-		{
+        public List<Card> GetAllCardsByCardSuit(String cardSuit)
+        {
             if (cardSuit == null)
-				throw new ArgumentException("Card suit cannot be null");
+        		throw new ArgumentException("Card suit cannot be null");
             
-			// Method syntax LINQ
-			List<Card> cards = this.Cards.Where(card => card.GetSuit().GetValue() == cardSuit.ToString()).ToList<Card>();
-			return cards;
-		}
+        	// Method syntax LINQ
+        	List<Card> cards = this.Cards.Where(card => card.GetSuit().GetValue() == cardSuit.ToString()).ToList<Card>();
+        	return cards;
+        }
 
-		/// <summary>
-		/// Gets the lowest rank card in the deck.
-		/// </summary>
-		/// <returns>The lowest rank card.</returns>
-		public Card GetLowestRankCard()
-		{
-			return this.Cards.First(card => card.Rank.GetValue() == this.Cards.Min(minCard => minCard.GetRank().GetValue()));
-		}
+        /// <summary>
+        /// Gets the lowest rank card in the deck.
+        /// </summary>
+        /// <returns>The lowest rank card.</returns>
+        public Card GetLowestRankCard()
+        {
+        	return this.Cards.First(card => card.Rank.GetValue() == this.Cards.Min(minCard => minCard.GetRank().GetValue()));
+        }
 
-		/// <summary>
-		/// Gets the highest rank card in the deck.
-		/// </summary>
-		/// <returns>The highest rank card.</returns>
-		public Card GetHighestRankCard()
-		{
-			return this.Cards.First(card => card.Rank.GetValue() == this.Cards.Max(maxCard => maxCard.GetRank().GetValue()));
-		}
+        /// <summary>
+        /// Gets the highest rank card in the deck.
+        /// </summary>
+        /// <returns>The highest rank card.</returns>
+        public Card GetHighestRankCard()
+        {
+        	return this.Cards.First(card => card.Rank.GetValue() == this.Cards.Max(maxCard => maxCard.GetRank().GetValue()));
+        }
 
-		/// <summary>
-		/// Prints the deck of cards to the console.
-		/// </summary>
-		public new String ToString()
-		{
+        /// <summary>
+        /// Prints the deck of cards to the console.
+        /// </summary>
+        public new String ToString()
+        {
             String cardString = "";
-			foreach (Card card in this.Cards)
+        	foreach (Card card in this.Cards)
                 cardString += card.ToString() + " ";
             return cardString.TrimEnd();
-		}
+        }
 	}
 }

@@ -192,7 +192,7 @@ namespace RyanKenward.General.Tests.Models
 		[Test]
 		public void AceUpTheSleeve_ShouldBeFiveAces()
 		{
-			IDeckOfCards sut = new DeckOfCards();
+			DeckOfCards sut = new DeckOfCards();
 			sut.AceUpTheSleeve();
 			Assert.AreEqual(sut.GetCards().Count, 53);
 			Assert.AreEqual(sut.GetAllCardsByCardName("Ace").Count, 5);

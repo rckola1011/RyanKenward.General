@@ -64,12 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
     <Folder Include="Scripts\Home\" />
     <Folder Include="Styles\" />
-    <Folder Include="Content\Images\" />
     <Folder Include="Models\Interfaces\" />
     <Folder Include="Models\Enums\" />
   </ItemGroup>
